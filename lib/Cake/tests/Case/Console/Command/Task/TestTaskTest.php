@@ -242,7 +242,7 @@ class TestTaskTest extends CakeTestCase {
 		$out = $this->getMock('ConsoleOutput', array(), array(), '', false);
 		$in = $this->getMock('ConsoleInput', array(), array(), '', false);
 
-		$this->Task = $this->getMock('TestTask', 
+		$this->Task = $this->getMock('TestTask',
 			array('in', 'err', 'createFile', '_stop', 'isLoadableClass'),
 			array($out, $out, $in)
 		);
@@ -538,7 +538,7 @@ class TestTaskTest extends CakeTestCase {
  * @return void
  */
 	function testInteractiveWithPlugin() {
-		$testApp = LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS;
+		$testApp = CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS;
 		App::build(array(
 			'plugins' => array($testApp)
 		), true);
@@ -550,8 +550,8 @@ class TestTaskTest extends CakeTestCase {
 			->will($this->onConsecutiveCalls(
 				5, //helper
 				1 //OtherHelper
-			)); 
-		
+			));
+
 		$this->Task->expects($this->once())
 			->method('createFile')
 			->with($path, $this->anything());
@@ -559,7 +559,7 @@ class TestTaskTest extends CakeTestCase {
 		$this->Task->stdout->expects($this->at(21))
 			->method('write')
 			->with('1. OtherHelperHelper');
-	
+
 		$this->Task->execute();
 	}
 

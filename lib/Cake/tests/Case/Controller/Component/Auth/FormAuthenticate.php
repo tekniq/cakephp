@@ -155,7 +155,7 @@ class FormAuthenticateTest extends CakeTestCase {
 	function testPluginModel() {
 		Cache::delete('object_map', '_cake_core_');
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
 		), true);
 		App::objects('plugin', null, false);
 
@@ -164,10 +164,10 @@ class FormAuthenticateTest extends CakeTestCase {
 		$user['username'] = 'gwoo';
 		$user['password'] = Security::hash(Configure::read('Security.salt') . 'cake');
 		$PluginModel->save($user, false);
-	
+
 		$this->auth->settings['userModel'] = 'TestPlugin.TestPluginAuthUser';
 		$this->auth->settings['fields']['username'] = 'username';
-	
+
 		$request = new CakeRequest('posts/index', false);
 		$request->data = array('TestPluginAuthUser' => array(
 			'username' => 'gwoo',

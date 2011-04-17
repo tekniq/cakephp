@@ -83,7 +83,7 @@ class CacheHelperTest extends CakeTestCase {
 		Configure::write('Cache.check', true);
 		Configure::write('Cache.disable', false);
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		), true);
 	}
 
@@ -421,7 +421,7 @@ class CacheHelperTest extends CakeTestCase {
 			'cache_parsing' => 21600
 		);
 		$this->Controller->request->here = '/cache_test/cache_parsing/1/2/name:mark/ice:cream';
-		
+
 		$View = new View($this->Controller);
 		$result = $View->render('index');
 
@@ -441,7 +441,7 @@ class CacheHelperTest extends CakeTestCase {
 	function testCacheWithCustomRoutes() {
 		Router::reload();
 		Router::connect('/:lang/:controller/:action/*', array(), array('lang' => '[a-z]{3}'));
-		
+
 		$this->Controller->cache_parsing();
 		$this->Controller->request->addParams(array(
 			'lang' => 'en',
@@ -519,10 +519,10 @@ class CacheHelperTest extends CakeTestCase {
 		$Cache->expects($this->once())->method('cache')
 			->with('posts/index', $View->output, false);
 		$Cache->afterRender('posts/index');
-		
+
 		Configure::write('Cache.check', false);
 		$Cache->afterRender('posts/index');
-		
+
 		Configure::write('Cache.check', true);
 		$View->cacheAction = false;
 		$Cache->afterRender('posts/index');

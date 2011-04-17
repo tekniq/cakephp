@@ -348,7 +348,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$this->RequestHandler->request->expects($this->any())
 			->method('accepts')
 			->will($this->returnValue(array('application/xml')));
-	
+
 		$this->RequestHandler->response = $this->getMock('CakeResponse', array('type', 'download', 'charset'));
 		$this->RequestHandler->response->expects($this->at(0))
 			->method('type')
@@ -359,7 +359,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$this->RequestHandler->response->expects($this->at(2))
 			->method('download')
 			->with('myfile.xml');
-		
+
 		$this->RequestHandler->renderAs($this->Controller, 'xml', array('attachment' => 'myfile.xml'));
 
 		$expected = 'request_handler_test' . DS . 'xml';
@@ -392,17 +392,17 @@ class RequestHandlerComponentTest extends CakeTestCase {
  */
 	function testRespondAsWithAttachment() {
 		$this->RequestHandler = $this->getMock(
-			'RequestHandlerComponent', 
-			array('_header'), 
+			'RequestHandlerComponent',
+			array('_header'),
 			array(&$this->Controller->Components)
 		);
 		$this->RequestHandler->response = $this->getMock('CakeResponse', array('type', 'download'));
 		$this->RequestHandler->request = $this->getMock('CakeRequest');
-		
+
 		$this->RequestHandler->request->expects($this->once())
 			->method('accepts')
 			->will($this->returnValue(array('application/xml')));
-		
+
 		$this->RequestHandler->response->expects($this->once())->method('download')
 			->with('myfile.xml');
 		$this->RequestHandler->response->expects($this->once())->method('type')
@@ -522,7 +522,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$request->expects($this->once())->method('is')
 			->with('mobile')
 			->will($this->returnValue(true));
-	
+
 		$this->RequestHandler->request = $request;
 		$this->assertTrue($this->RequestHandler->isMobile());
 	}
@@ -538,7 +538,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$request->expects($this->once())->method('is')
 			->with('ssl')
 			->will($this->returnValue(true));
-	
+
 		$this->RequestHandler->request = $request;
 		$this->assertTrue($this->RequestHandler->isSsl());
 	}
@@ -558,15 +558,15 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$request->expects($this->at(1))->method('is')
 			->with('post')
 			->will($this->returnValue(false));
-		
+
 		$request->expects($this->at(2))->method('is')
 			->with('delete')
 			->will($this->returnValue(true));
-			
+
 		$request->expects($this->at(3))->method('is')
 			->with('put')
 			->will($this->returnValue(false));
-		
+
 		$this->RequestHandler->request = $request;
 		$this->assertTrue($this->RequestHandler->isGet());
 		$this->assertFalse($this->RequestHandler->isPost());
@@ -588,7 +588,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 
 		$result = $this->RequestHandler->mapAlias('wap');
 		$this->assertEquals('text/vnd.wap.wml', $result);
-		
+
 		$result = $this->RequestHandler->mapAlias(array('xml', 'js', 'json'));
 		$expected = array('application/xml', 'text/javascript', 'application/json');
 		$this->assertEquals($expected, $result);
@@ -670,7 +670,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  */
 	function testAjaxRedirectAsRequestAction() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		), true);
 
 		$this->Controller->RequestHandler = $this->getMock('RequestHandlerComponent', array('_stop'), array(&$this->Controller->Components));
@@ -699,7 +699,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  */
 	function testAjaxRedirectAsRequestActionStillRenderingLayout() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		), true);
 
 		$this->Controller->RequestHandler = $this->getMock('RequestHandlerComponent', array('_stop'), array(&$this->Controller->Components));

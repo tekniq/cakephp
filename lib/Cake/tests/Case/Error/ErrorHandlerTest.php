@@ -37,8 +37,8 @@ class ErrorHandlerTest extends CakeTestCase {
 	function setUp() {
 		App::build(array(
 			'views' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'views'. DS,
-				LIBS . 'libs' . DS . 'view' . DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'views'. DS,
+				CAKE . 'libs' . DS . 'view' . DS
 			)
 		), true);
 		Router::reload();

@@ -75,6 +75,6 @@
 		return;
 	}
 
-	require LIBS .  'Routing' . DS .'Dispatcher.php';
+	require CAKE .  'Routing' . DS .'Dispatcher.php';
 	$Dispatcher = new Dispatcher();
 	$Dispatcher->dispatch(new CakeRequest());

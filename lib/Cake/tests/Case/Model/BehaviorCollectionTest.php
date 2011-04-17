@@ -345,11 +345,11 @@ class Test2Behavior extends TestBehavior {
 	public $mapMethods = array('/mappingRobot(\w+)/' => 'mapped');
 
 	function resolveMethod($model, $stuff) {
-		
+
 	}
-	
+
 	function mapped($model, $method, $query) {
-		
+
 	}
 }
 
@@ -453,7 +453,7 @@ class BehaviorCollectionTest extends CakeTestCase {
 		$this->assertEquals($Apple->testMethod(true), 'working');
 		$this->assertEquals($Apple->Behaviors->dispatchMethod($Apple, 'testMethod'), 'working');
 
-		App::build(array('plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)));
+		App::build(array('plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)));
 		$this->assertTrue($Apple->Behaviors->load('SomeOther', array('className' => 'TestPlugin.TestPluginPersisterOne')));
 		$this->assertInstanceOf('TestPluginPersisterOneBehavior', $Apple->Behaviors->SomeOther);
 
@@ -1139,7 +1139,7 @@ class BehaviorCollectionTest extends CakeTestCase {
 		$Sample = new Sample();
 		$Collection = new BehaviorCollection();
 		$Collection->init('Sample', array('Test', 'Test2'));
-	
+
 		$this->assertTrue($Collection->hasMethod('testMethod'));
 		$this->assertTrue($Collection->hasMethod('resolveMethod'));
 

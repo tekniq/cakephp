@@ -41,10 +41,10 @@ class CommandListTest extends CakeTestCase {
 		parent::setUp();
 		App::build(array(
 			'plugins' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS
 			),
 			'Console/Command' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'Console' . DS . 'Command' . DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'Console' . DS . 'Command' . DS
 			)
 		), true);
 		App::objects('plugin', null, false);
@@ -129,7 +129,7 @@ class CommandListTest extends CakeTestCase {
 
 		$expected = "/\[.*TestPlugin.*\]\n[ ]+example/";
 		$this->assertPattern($expected, $output);
-		
+
 		$expected = "/\[.*Core.*\]\n[ ]+acl, api, bake, command_list, console, i18n, schema, testsuite/";
 		$this->assertPattern($expected, $output);
 	}
@@ -150,7 +150,7 @@ class CommandListTest extends CakeTestCase {
 
 		$find = '<shell name="bake" call_as="bake" provider="CORE" help="bake -h"/>';
 		$this->assertContains($find, $output);
-		
+
 		$find = '<shell name="welcome" call_as="test_plugin_two.welcome" provider="TestPluginTwo" help="test_plugin_two.welcome -h"/>';
 		$this->assertContains($find, $output);
 	}

@@ -20,7 +20,7 @@ App::uses('Dispatcher', 'Routing');
 App::uses('CakeResponse', 'Network');
 
 if (!class_exists('AppController', false)) {
-	require_once LIBS . 'Controller' . DS . 'AppController.php';
+	require_once CAKE . 'Controller' . DS . 'AppController.php';
 } elseif (!defined('APP_CONTROLLER_EXISTS')){
 	define('APP_CONTROLLER_EXISTS', true);
 }
@@ -739,7 +739,7 @@ class DispatcherTest extends CakeTestCase {
 			$this->assertEquals('Action SomePagesController::home() could not be found.', $e->getMessage());
 		}
 	}
-	
+
 /**
  * test that methods declared in Controller are treated as missing methods.
  *
@@ -765,7 +765,7 @@ class DispatcherTest extends CakeTestCase {
  */
 	public function testDispatchBasic() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 		$Dispatcher = new TestDispatcher();
 		Configure::write('App.baseUrl', '/index.php');
@@ -813,7 +813,7 @@ class DispatcherTest extends CakeTestCase {
 		$url = new CakeRequest('test_dispatch_pages/camelCased');
 		$controller = $Dispatcher->dispatch($url, array('return' => 1));
 		$this->assertEqual('TestDispatchPages', $controller->name);
-	
+
 		$url = new CakeRequest('test_dispatch_pages/camelCased/something. .');
 		$controller = $Dispatcher->dispatch($url, array('return' => 1));
 		$this->assertEqual($controller->params['pass'][0], 'something. .', 'Period was chopped off. %s');
@@ -857,7 +857,7 @@ class DispatcherTest extends CakeTestCase {
 		Router::reload();
 		$Dispatcher = new TestDispatcher();
 		Router::connect(
-			'/my_plugin/:controller/*', 
+			'/my_plugin/:controller/*',
 			array('plugin' => 'my_plugin', 'controller' => 'pages', 'action' => 'display')
 		);
 
@@ -1000,7 +1000,7 @@ class DispatcherTest extends CakeTestCase {
 			'action' => 'admin_index',
 			'prefix' => 'admin',
 			'admin' =>  true,
-			'form' => array(), 
+			'form' => array(),
 			'return' => 1
 		);
 		foreach ($expected as $key => $value) {
@@ -1047,7 +1047,7 @@ class DispatcherTest extends CakeTestCase {
 		}
 		Router::reload();
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		), true);
 		App::objects('plugin', null, false);
 
@@ -1092,7 +1092,7 @@ class DispatcherTest extends CakeTestCase {
 		$Dispatcher->base = false;
 
 		$url = new CakeRequest('my_plugin/not_here/param:value/param2:value2');
-		
+
 		try {
 			$controller = $Dispatcher->dispatch($url, array('return'=> 1));
 			$this->fail('No exception.');
@@ -1147,7 +1147,7 @@ class DispatcherTest extends CakeTestCase {
 	public function testTestPluginDispatch() {
 		$Dispatcher = new TestDispatcher();
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		));
 		App::objects('plugin', null, false);
 		Router::reload();
@@ -1175,7 +1175,7 @@ class DispatcherTest extends CakeTestCase {
 		$_SERVER['PHP_SELF'] = '/cake/repo/branches/1.2.x.x/index.php';
 		$Dispatcher = new TestDispatcher();
 		$url = new CakeRequest('some_posts/index/param:value/param2:value2');
-		
+
 		try {
 			$controller = $Dispatcher->dispatch($url, array('return'=> 1));
 			$this->fail('No exception.');
@@ -1205,9 +1205,9 @@ class DispatcherTest extends CakeTestCase {
 		Router::reload();
 
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
-			'vendors' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'vendors'. DS),
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'vendors' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'vendors'. DS),
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 
 		$Dispatcher = new TestDispatcher();
@@ -1219,7 +1219,7 @@ class DispatcherTest extends CakeTestCase {
 		} catch (MissingControllerException $e) {
 			$this->assertEquals('Controller class ThemeController could not be found.', $e->getMessage());
 		}
-		
+
 		try {
 			$Dispatcher->dispatch(new CakeRequest('theme/test_theme/pdfs'));
 			$this->fail('No exception');
@@ -1231,21 +1231,21 @@ class DispatcherTest extends CakeTestCase {
 		$Dispatcher->dispatch(new CakeRequest('theme/test_theme/flash/theme_test.swf'));
 		$result = ob_get_clean();
 
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'flash' . DS . 'theme_test.swf');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'flash' . DS . 'theme_test.swf');
 		$this->assertEqual($file, $result);
 		$this->assertEqual('this is just a test to load swf file from the theme.', $result);
 
 		ob_start();
 		$Dispatcher->dispatch(new CakeRequest('theme/test_theme/pdfs/theme_test.pdf'));
 		$result = ob_get_clean();
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'pdfs' . DS . 'theme_test.pdf');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'pdfs' . DS . 'theme_test.pdf');
 		$this->assertEqual($file, $result);
 		$this->assertEqual('this is just a test to load pdf file from the theme.', $result);
 
 		ob_start();
 		$Dispatcher->dispatch(new CakeRequest('theme/test_theme/img/test.jpg'));
 		$result = ob_get_clean();
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'img' . DS . 'test.jpg');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'themed' . DS . 'test_theme' . DS . 'webroot' . DS . 'img' . DS . 'test.jpg');
 		$this->assertEqual($file, $result);
 
 		ob_start();
@@ -1266,20 +1266,20 @@ class DispatcherTest extends CakeTestCase {
 		ob_start();
 		$Dispatcher->asset('test_plugin/root.js');
 		$result = ob_get_clean();
-		$expected = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'root.js');
+		$expected = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'root.js');
 		$this->assertEqual($result, $expected);
 
 		ob_start();
 		$Dispatcher->dispatch(new CakeRequest('test_plugin/flash/plugin_test.swf'));
 		$result = ob_get_clean();
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'flash' . DS . 'plugin_test.swf');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'flash' . DS . 'plugin_test.swf');
 		$this->assertEqual($file, $result);
 		$this->assertEqual('this is just a test to load swf file from the plugin.', $result);
 
 		ob_start();
 		$Dispatcher->dispatch(new CakeRequest('test_plugin/pdfs/plugin_test.pdf'));
 		$result = ob_get_clean();
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'pdfs' . DS . 'plugin_test.pdf');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS . 'webroot' . DS . 'pdfs' . DS . 'plugin_test.pdf');
 		$this->assertEqual($file, $result);
 		 $this->assertEqual('this is just a test to load pdf file from the plugin.', $result);
 
@@ -1301,7 +1301,7 @@ class DispatcherTest extends CakeTestCase {
 		ob_start();
 		$Dispatcher->asset('test_plugin/img/cake.icon.gif');
 		$result = ob_get_clean();
-		$file = file_get_contents(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' .DS . 'webroot' . DS . 'img' . DS . 'cake.icon.gif');
+		$file = file_get_contents(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' .DS . 'webroot' . DS . 'img' . DS . 'cake.icon.gif');
 		$this->assertEqual($file, $result);
 
 		ob_start();
@@ -1325,7 +1325,7 @@ class DispatcherTest extends CakeTestCase {
 		$Dispatcher->asset('test_plugin/css/theme_one.htc');
 		$result = ob_get_clean();
 		$this->assertEqual('htc file', $result);
-		
+
 		if (php_sapi_name() == 'cli') {
 			while (ob_get_level()) {
 				ob_get_clean();
@@ -1352,7 +1352,7 @@ class DispatcherTest extends CakeTestCase {
 	}
 
 /**
- * test that asset filters work for theme and plugin assets	
+ * test that asset filters work for theme and plugin assets
  *
  * @return void
  */
@@ -1372,7 +1372,7 @@ class DispatcherTest extends CakeTestCase {
 		$this->assertTrue($Dispatcher->asset('test_plugin/cjs/debug_kit.js'));
 
 		$this->assertFalse($Dispatcher->asset('css/ccss/debug_kit.css'));
-		
+
 		$this->assertFalse($Dispatcher->asset('js/cjs/debug_kit.js'));
 	}
 /**
@@ -1392,7 +1392,7 @@ class DispatcherTest extends CakeTestCase {
 		Router::connect('/', array('controller' => 'test_cached_pages', 'action' => 'index'));
 
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS),
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS),
 		), true);
 
 		$dispatcher = new TestDispatcher();

@@ -70,7 +70,7 @@ class ExtractTaskTest extends CakeTestCase {
 	public function testExecute() {
 		$this->Task->interactive = false;
 
-		$this->Task->params['paths'] = LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'pages';
+		$this->Task->params['paths'] = CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'pages';
 		$this->Task->params['output'] = $this->path . DS;
 		$this->Task->expects($this->never())->method('err');
 		$this->Task->expects($this->any())->method('in')
@@ -117,7 +117,7 @@ class ExtractTaskTest extends CakeTestCase {
 
 		$pattern = '/To change its layout, create: APP\/views\/layouts\/default\.ctp\./s';
 		$this->assertPattern($pattern, $result);
-		
+
 
 		// extract.ctp
 		$pattern = '/\#: (\\\\|\/)extract\.ctp:6\n';
@@ -157,7 +157,7 @@ class ExtractTaskTest extends CakeTestCase {
 	function testExtractWithExclude() {
 		$this->Task->interactive = false;
 
-		$this->Task->params['paths'] = LIBS . 'tests' . DS . 'test_app' . DS . 'View';
+		$this->Task->params['paths'] = CAKE . 'tests' . DS . 'test_app' . DS . 'View';
 		$this->Task->params['output'] = $this->path . DS;
 		$this->Task->params['exclude'] = 'pages,layouts';
 
@@ -170,7 +170,7 @@ class ExtractTaskTest extends CakeTestCase {
 
 		$pattern = '/\#: .*extract\.ctp:6\n/';
 		$this->assertNotRegExp($pattern, $result);
-		
+
 		$pattern = '/\#: .*default\.ctp:26\n/';
 		$this->assertNotRegExp($pattern, $result);
 	}
@@ -183,10 +183,10 @@ class ExtractTaskTest extends CakeTestCase {
 	function testExtractMultiplePaths() {
 		$this->Task->interactive = false;
 
-		$this->Task->params['paths'] = 
-			LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'pages,' .
-			LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'posts';
-	
+		$this->Task->params['paths'] =
+			CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'pages,' .
+			CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'posts';
+
 		$this->Task->params['output'] = $this->path . DS;
 		$this->Task->expects($this->never())->method('err');
 		$this->Task->expects($this->never())->method('_stop');

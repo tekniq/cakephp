@@ -400,8 +400,8 @@ class Debugger {
 		} elseif (strpos($path, ROOT) === 0) {
 			return str_replace(ROOT, 'ROOT', $path);
 		}
-	
-		if (strpos($path, LIBS) === 0) {
+
+		if (strpos($path, CAKE) === 0) {
 			return str_replace($corePath, 'CORE' . DS, $path);
 		}
 		return $path;
@@ -568,7 +568,7 @@ class Debugger {
 /**
  * Takes a processed array of data from an error and displays it in the chosen format.
  *
- * @param string $data 
+ * @param string $data
  * @return void
  */
 	public function outputError($data) {

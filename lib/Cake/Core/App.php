@@ -390,7 +390,7 @@ class App {
  */
 	public static function core($type) {
 		if ($type) {
-			return isset($paths[$type]) ? $paths[$type] : array(LIBS . $type . DS);
+			return isset($paths[$type]) ? $paths[$type] : array(CAKE . $type . DS);
 		}
 	}
 
@@ -541,9 +541,9 @@ class App {
 			$paths = self::path($package, $plugin);
 
 			if (empty($plugin)) {
-				$appLibs = empty(self::$__packages['Lib']) ? APPLIBS : current(self::$__packages['Lib']);
+				$appLibs = empty(self::$__packages['Lib']) ? APPCAKE : current(self::$__packages['Lib']);
 				$paths[] =  $appLibs . $package . DS;
-				$paths[] = LIBS . $package . DS;
+				$paths[] = CAKE . $package . DS;
 			}
 
 			foreach ($paths as $path) {

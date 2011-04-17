@@ -478,9 +478,9 @@ class ObjectTest extends CakeTestCase {
 		Configure::write('Cache.disable', false);
 
 		App::build(array(
-			'models' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models' . DS),
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins'. DS),
-			'behaviors' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models'. DS . 'behaviors' . DS),
+			'models' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins'. DS),
+			'behaviors' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models'. DS . 'behaviors' . DS),
 		), true);
 
 		$this->assertFalse(class_exists('PersisterOneBehaviorBehavior'));
@@ -539,8 +539,8 @@ class ObjectTest extends CakeTestCase {
 		$this->assertFalse(class_exists('ContainableBehavior'));
 
 		App::build(array(
-			'models' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models' . DS),
-			'behaviors' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models'. DS . 'behaviors' . DS),
+			'models' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models' . DS),
+			'behaviors' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models'. DS . 'behaviors' . DS),
 		), true);
 
 		$this->assertFalse(class_exists('PersistOneBehaviorBehavior'));
@@ -683,9 +683,9 @@ class ObjectTest extends CakeTestCase {
  */
 	function testRequestAction() {
 		App::build(array(
-			'models' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models' . DS),
-			'views' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'views' . DS),
-			'controllers' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'controllers' . DS)
+			'models' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models' . DS),
+			'views' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'views' . DS),
+			'controllers' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'controllers' . DS)
 		));
 		$result = $this->object->requestAction('');
 		$this->assertFalse($result);
@@ -723,11 +723,11 @@ class ObjectTest extends CakeTestCase {
  */
 	function testRequestActionPlugins() {
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
 		));
 		App::objects('plugin', null, false);
 		Router::reload();
-		
+
 		$result = $this->object->requestAction('/test_plugin/tests/index', array('return'));
 		$expected = 'test plugin index';
 		$this->assertEqual($result, $expected);
@@ -751,7 +751,7 @@ class ObjectTest extends CakeTestCase {
 		);
 		$expected = 25;
 		$this->assertEqual($result, $expected);
-		
+
 		App::build();
 		App::objects('plugin', null, false);
 	}
@@ -763,11 +763,11 @@ class ObjectTest extends CakeTestCase {
  */
 	function testRequestActionArray() {
 		App::build(array(
-			'models' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'models' . DS),
-			'views' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'views' . DS),
-			'controllers' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'controllers' . DS)
+			'models' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'models' . DS),
+			'views' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'views' . DS),
+			'controllers' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'controllers' . DS)
 		));
-	
+
 		$result = $this->object->requestAction(
 			array('controller' => 'request_action', 'action' => 'test_request_action')
 		);
@@ -775,7 +775,7 @@ class ObjectTest extends CakeTestCase {
 		$this->assertEqual($result, $expected);
 
 		$result = $this->object->requestAction(
-			array('controller' => 'request_action', 'action' => 'another_ra_test'), 
+			array('controller' => 'request_action', 'action' => 'another_ra_test'),
 			array('pass' => array('5', '7'))
 		);
 		$expected = 12;
@@ -831,7 +831,7 @@ class ObjectTest extends CakeTestCase {
 		$this->assertEqual($result['named'], $expected);
 
 		$result = $this->object->requestAction(
-			array('controller' => 'request_action', 'action' => 'params_pass'), 
+			array('controller' => 'request_action', 'action' => 'params_pass'),
 			array('named' => array('sort' => 'desc', 'limit' => 5))
 		);
 		$this->assertEqual($result['named'], $expected);

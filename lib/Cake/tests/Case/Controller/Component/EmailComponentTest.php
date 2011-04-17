@@ -66,7 +66,7 @@ class EmailTestComponent extends EmailComponent {
 /**
  * Allows mocks to be used with tests.
  *
- * @param array $config 
+ * @param array $config
  * @return void
  */
 	function _getSocket($config) {
@@ -255,7 +255,7 @@ class EmailComponentTest extends CakeTestCase {
 		ClassRegistry::addObject('view', new View($this->Controller));
 
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 	}
 
@@ -464,7 +464,7 @@ TEMPDOC;
 		$this->assertPattern('/RCPT TO: <postmaster@localhost>\n/', $this->Controller->EmailTest->smtpSend);
 		$this->assertPattern('/RCPT TO: <root@localhost>\n/', $this->Controller->EmailTest->smtpSend);
 		$this->assertPattern(
-			'/To: postmaster@localhost, root@localhost[\n\r]/', 
+			'/To: postmaster@localhost, root@localhost[\n\r]/',
 			$this->Controller->EmailTest->smtpSend
 		);
 	}
@@ -682,7 +682,7 @@ HTMLBLOC;
 		$expect = '<pre>' . str_replace('{CONTENTTYPE}', 'text/html; charset=UTF-8', $header) . $html . '</pre>';
 		$this->assertTrue($this->Controller->EmailTest->send('This is the body of the message', 'default', 'thin'));
 		$this->assertEqual($this->Controller->Session->read('Message.email.message'), $this->__osFix($expect));
-		
+
 		$result = ClassRegistry::getObject('view');
 		$this->assertFalse($result);
 	}
@@ -805,7 +805,7 @@ HTMLBLOC;
  */
 	function testMessageRetrievalWithoutTemplate() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 
 		$this->Controller->EmailTest->to = 'postmaster@localhost';
@@ -843,7 +843,7 @@ HTMLBLOC;
  */
 	function testMessageRetrievalWithTemplate() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 
 		$this->Controller->set('value', 22091985);
@@ -1175,8 +1175,8 @@ HTMLBLOC;
 
 	function testPluginCustomViewClass() {
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 
 		$this->Controller->view = 'TestPlugin.Email';
@@ -1281,7 +1281,7 @@ HTMLBLOC;
 
 		$result = $this->Controller->EmailTest->formatAddress('alias <email@example.com>');
 		$this->assertEqual($result, 'alias <email@example.com>');
-		
+
 		$result = $this->Controller->EmailTest->formatAddress('alias<email@example.com>');
 		$this->assertEqual($result, 'alias <email@example.com>');
 
@@ -1310,7 +1310,7 @@ HTMLBLOC;
 		$this->Controller->EmailTest->charset = 'UTF-8';
 		$result = $this->Controller->EmailTest->formatAddress('ÄÖÜTest <email@domain.de>');
 		$this->assertEqual($result, '=?UTF-8?B?w4TDlsOcVGVzdCA=?= <email@domain.de>');
-		
+
 		$result = $this->Controller->EmailTest->formatAddress('ÄÖÜTest<email@domain.de>');
 		$this->assertEqual($result, '=?UTF-8?B?w4TDlsOcVGVzdA==?= <email@domain.de>');
 

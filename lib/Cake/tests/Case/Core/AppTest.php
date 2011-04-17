@@ -174,22 +174,22 @@ class AppImportTest extends CakeTestCase {
  */
 	function testCore() {
 		$model = App::core('Model');
-		$this->assertEqual(array(LIBS . 'Model' . DS), $model);
+		$this->assertEqual(array(CAKE . 'Model' . DS), $model);
 
 		$view = App::core('View');
-		$this->assertEqual(array(LIBS . 'View' . DS), $view);
+		$this->assertEqual(array(CAKE . 'View' . DS), $view);
 
 		$controller = App::core('Controller');
-		$this->assertEqual(array(LIBS . 'Controller' . DS), $controller);
+		$this->assertEqual(array(CAKE . 'Controller' . DS), $controller);
 
 		$component = App::core('Controller/Component');
-		$this->assertEqual(array(LIBS . 'Controller' . DS . 'Component' . DS), $component);
+		$this->assertEqual(array(CAKE . 'Controller' . DS . 'Component' . DS), $component);
 
 		$auth = App::core('Controller/Component/Auth');
-		$this->assertEqual(array(LIBS . 'Controller' . DS . 'Component' . DS . 'Auth' . DS), $auth);
+		$this->assertEqual(array(CAKE . 'Controller' . DS . 'Component' . DS . 'Auth' . DS), $auth);
 
 		$datasource = App::core('Model/Datasource');
-		$this->assertEqual(array(LIBS . 'Model' . DS . 'Datasource' . DS), $datasource);
+		$this->assertEqual(array(CAKE . 'Model' . DS . 'Datasource' . DS), $datasource);
 	}
 
 /**
@@ -199,7 +199,7 @@ class AppImportTest extends CakeTestCase {
  * @return void
  */
 	function testListObjects() {
-		$result = App::objects('class',  LIBS . 'Routing', false);
+		$result = App::objects('class',  CAKE . 'Routing', false);
 		$this->assertTrue(in_array('Dispatcher', $result));
 		$this->assertTrue(in_array('Router', $result));
 
@@ -253,7 +253,7 @@ class AppImportTest extends CakeTestCase {
 
 		App::build(array(
 			'plugins' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'Lib' . DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'Lib' . DS
 			)
 		));
 		$result = App::objects('plugin', null, false);
@@ -270,8 +270,8 @@ class AppImportTest extends CakeTestCase {
  */
 	function testListObjectsInPlugin() {
 		App::build(array(
-			'Model' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'Model' . DS),
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'Model' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'Model' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		));
 
 		$result = App::objects('TestPlugin.model');
@@ -319,18 +319,18 @@ class AppImportTest extends CakeTestCase {
  */
 	function testPluginPath() {
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		));
 		$path = App::pluginPath('test_plugin');
-		$expected = LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS;
+		$expected = CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS;
 		$this->assertEqual($path, $expected);
 
 		$path = App::pluginPath('TestPlugin');
-		$expected = LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS;
+		$expected = CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin' . DS;
 		$this->assertEqual($path, $expected);
 
 		$path = App::pluginPath('TestPluginTwo');
-		$expected = LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin_two' . DS;
+		$expected = CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS . 'test_plugin_two' . DS;
 		$this->assertEqual($path, $expected);
 		App::build();
 	}
@@ -342,14 +342,14 @@ class AppImportTest extends CakeTestCase {
  */
 	function testThemePath() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'views' . DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'views' . DS)
 		));
 		$path = App::themePath('test_theme');
-		$expected = LIBS . 'tests' . DS . 'test_app' . DS . 'views' . DS . 'themed' . DS . 'test_theme' . DS;
+		$expected = CAKE . 'tests' . DS . 'test_app' . DS . 'views' . DS . 'themed' . DS . 'test_theme' . DS;
 		$this->assertEqual($path, $expected);
 
 		$path = App::themePath('TestTheme');
-		$expected = LIBS . 'tests' . DS . 'test_app' . DS . 'views' . DS . 'themed' . DS . 'test_theme' . DS;
+		$expected = CAKE . 'tests' . DS . 'test_app' . DS . 'views' . DS . 'themed' . DS . 'test_theme' . DS;
 		$this->assertEqual($path, $expected);
 
 		App::build();
@@ -442,8 +442,8 @@ class AppImportTest extends CakeTestCase {
  */
 	function testPluginImporting() {
 		App::build(array(
-			'libs' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'Lib' . DS),
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'libs' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'Lib' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		));
 
 		$result = App::import('Controller', 'TestPlugin.Tests');
@@ -462,7 +462,7 @@ class AppImportTest extends CakeTestCase {
 		$result = App::import('Helper', 'TestPlugin.OtherHelper');
 		$this->assertTrue($result);
 		$this->assertTrue(class_exists('OtherHelperHelper'));
-		
+
 		$result = App::import('Helper', 'TestPlugin.TestPluginApp');
 		$this->assertTrue($result);
 		$this->assertTrue(class_exists('TestPluginAppHelper'));
@@ -470,7 +470,7 @@ class AppImportTest extends CakeTestCase {
 		$result = App::import('Datasource', 'TestPlugin.TestSource');
 		$this->assertTrue($result);
 		$this->assertTrue(class_exists('TestSource'));
-		
+
 		App::build();
 	}
 
@@ -485,7 +485,7 @@ class AppImportTest extends CakeTestCase {
 		$this->assertFalse(class_exists('BananaHelper', false), 'BananaHelper exists, cannot test importing it.');
 		App::build(array(
 			'View/Helper' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'Helper' . DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'View' . DS . 'Helper' . DS
 			)
 		));
 		$this->assertFalse(class_exists('BananaHelper', false), 'BananaHelper exists, cannot test importing it.');
@@ -502,10 +502,10 @@ class AppImportTest extends CakeTestCase {
  * @return void
  */
 	function testFileLoading () {
-		$file = App::import('File', 'RealFile', false, array(), LIBS  . 'config' . DS . 'config.php');
+		$file = App::import('File', 'RealFile', false, array(), CAKE  . 'config' . DS . 'config.php');
 		$this->assertTrue($file);
 
-		$file = App::import('File', 'NoFile', false, array(), LIBS  . 'config' . DS . 'cake' . DS . 'config.php');
+		$file = App::import('File', 'NoFile', false, array(), CAKE  . 'config' . DS . 'cake' . DS . 'config.php');
 		$this->assertFalse($file);
 	}
 
@@ -517,12 +517,12 @@ class AppImportTest extends CakeTestCase {
  */
 	function testFileLoadingWithArray() {
 		$type = array('type' => 'File', 'name' => 'SomeName', 'parent' => false,
-				'file' => LIBS  . DS . 'config' . DS . 'config.php');
+				'file' => CAKE  . DS . 'config' . DS . 'config.php');
 		$file = App::import($type);
 		$this->assertTrue($file);
 
 		$type = array('type' => 'File', 'name' => 'NoFile', 'parent' => false,
-				'file' => LIBS  . 'config' . DS . 'cake' . DS . 'config.php');
+				'file' => CAKE  . 'config' . DS . 'cake' . DS . 'config.php');
 		$file = App::import($type);
 		$this->assertFalse($file);
 	}
@@ -534,13 +534,13 @@ class AppImportTest extends CakeTestCase {
  * @return void
  */
 	function testFileLoadingReturnValue () {
-		$file = App::import('File', 'Name', false, array(), LIBS  . 'config' . DS . 'config.php', true);
+		$file = App::import('File', 'Name', false, array(), CAKE  . 'config' . DS . 'config.php', true);
 		$this->assertTrue(!empty($file));
 
 		$this->assertTrue(isset($file['Cake.version']));
 
 		$type = array('type' => 'File', 'name' => 'OtherName', 'parent' => false,
-				'file' => LIBS  . 'config' . DS . 'config.php', 'return' => true);
+				'file' => CAKE  . 'config' . DS . 'config.php', 'return' => true);
 		$file = App::import($type);
 		$this->assertTrue(!empty($file));
 
@@ -554,10 +554,10 @@ class AppImportTest extends CakeTestCase {
  * @return void
  */
 	function testLoadingWithSearch () {
-		$file = App::import('File', 'NewName', false, array(LIBS . 'config' . DS), 'config.php');
+		$file = App::import('File', 'NewName', false, array(CAKE . 'config' . DS), 'config.php');
 		$this->assertTrue($file);
 
-		$file = App::import('File', 'AnotherNewName', false, array(LIBS), 'config.php');
+		$file = App::import('File', 'AnotherNewName', false, array(CAKE), 'config.php');
 		$this->assertFalse($file);
 	}
 
@@ -573,7 +573,7 @@ class AppImportTest extends CakeTestCase {
 			'name' => 'RandomName',
 			'parent' => false,
 			'file' => 'config.php',
-			'search' => array(LIBS . 'config' . DS)
+			'search' => array(CAKE . 'config' . DS)
 		);
 		$file = App::import($type);
 		$this->assertTrue($file);
@@ -583,7 +583,7 @@ class AppImportTest extends CakeTestCase {
 			'name' => 'AnotherRandomName',
 			'parent' => false,
 			'file' => 'config.php',
-			'search' => array(LIBS)
+			'search' => array(CAKE)
 		);
 		$file = App::import($type);
 		$this->assertFalse($file);
@@ -600,7 +600,7 @@ class AppImportTest extends CakeTestCase {
 			$this->markTestSkipped('Cannot test loading of classes that exist.');
 		}
 		App::build(array(
-			'Model' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'Model' . DS)
+			'Model' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'Model' . DS)
 		));
 		$toLoad = array('PersisterOne', 'PersisterTwo');
 		$load = App::import('Model', $toLoad);
@@ -619,8 +619,8 @@ class AppImportTest extends CakeTestCase {
 
 	function testLoadingVendor() {
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
-			'vendors' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'vendors'. DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'vendors' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'vendors'. DS),
 		), true);
 
 		ob_start();
@@ -675,8 +675,8 @@ class AppImportTest extends CakeTestCase {
  */
 	public function testLoadClassInLibs() {
 		App::build(array(
-			'libs' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'libs' . DS),
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
+			'libs' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'libs' . DS),
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)
 		), true);
 
 		$this->assertFalse(class_exists('CustomLibClass', false));

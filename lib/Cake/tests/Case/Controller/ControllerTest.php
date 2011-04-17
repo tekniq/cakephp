@@ -438,9 +438,9 @@ class ControllerTest extends CakeTestCase {
  */
 	function testLoadModelInPlugins() {
 		App::build(array(
-			'plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
-			'Controller' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'Controller' . DS),
-			'Model' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'Model' . DS)
+			'plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS),
+			'Controller' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'Controller' . DS),
+			'Model' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'Model' . DS)
 		));
 		App::uses('TestPluginAppController', 'TestPlugin.Controller');
 		App::uses('TestPluginController', 'TestPlugin.Controller');
@@ -488,7 +488,7 @@ class ControllerTest extends CakeTestCase {
 
 		unset($Controller);
 
-		App::build(array('plugins' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)));
+		App::build(array('plugins' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'plugins' . DS)));
 
 		$Controller = new Controller($request);
 		$Controller->uses = array('TestPlugin.TestPluginPost');
@@ -578,7 +578,7 @@ class ControllerTest extends CakeTestCase {
 		$this->assertEqual($result, $expected);
 
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		));
 		$Controller = new Controller($request);
 		$Controller->response = $this->getMock('CakeResponse', array('_sendHeader'));
@@ -640,7 +640,7 @@ class ControllerTest extends CakeTestCase {
  */
 	function testRender() {
 		App::build(array(
-			'View' => array(LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS)
+			'View' => array(CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS)
 		), true);
 		$request = new CakeRequest('controller_posts/index');
 		$request->params['action'] = 'index';
@@ -686,7 +686,7 @@ class ControllerTest extends CakeTestCase {
 	function testComponentBeforeRenderChangingViewClass() {
 		App::build(array(
 			'View' => array(
-				LIBS . 'tests' . DS . 'test_app' . DS . 'View'. DS
+				CAKE . 'tests' . DS . 'test_app' . DS . 'View'. DS
 			)
 		), true);
 		$Controller = new Controller($this->getMock('CakeRequest'));

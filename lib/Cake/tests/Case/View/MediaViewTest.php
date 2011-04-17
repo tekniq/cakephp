@@ -72,7 +72,7 @@ class MediaViewTest extends CakeTestCase {
  */
 	function testRender() {
 		$this->MediaView->viewVars = array(
-			'path' =>  LIBS . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
+			'path' =>  CAKE . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
 			'id' => 'test_asset.css',
 			'extension' => 'css',
 		);
@@ -118,7 +118,7 @@ class MediaViewTest extends CakeTestCase {
  */
 	function testRenderWithUnknownFileType() {
 		$this->MediaView->viewVars = array(
-			'path' =>  LIBS . 'tests' . DS . 'test_app' . DS . 'config' . DS,
+			'path' =>  CAKE . 'tests' . DS . 'test_app' . DS . 'config' . DS,
 			'id' => 'no_section.ini',
 			'extension' => 'ini',
 		);
@@ -173,7 +173,7 @@ class MediaViewTest extends CakeTestCase {
  */
 	function testConnectionAborted() {
 		$this->MediaView->viewVars = array(
-			'path' =>  LIBS . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
+			'path' =>  CAKE . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
 			'id' => 'test_asset.css',
 			'extension' => 'css',
 		);
@@ -197,7 +197,7 @@ class MediaViewTest extends CakeTestCase {
  */
 	function testConnectionAbortedOnBuffering() {
 		$this->MediaView->viewVars = array(
-			'path' =>  LIBS . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
+			'path' =>  CAKE . 'tests' . DS . 'test_app' . DS . 'vendors' . DS .'css' . DS,
 			'id' => 'test_asset.css',
 			'extension' => 'css',
 		);
