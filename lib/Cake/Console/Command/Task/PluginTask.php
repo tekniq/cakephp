@@ -28,7 +28,7 @@ App::uses('Folder', 'Utility');
 class PluginTask extends Shell {
 
 /**
- * path to CONTROLLERS directory
+ * path to plugins directory
  *
  * @var array
  * @access public
@@ -41,7 +41,7 @@ class PluginTask extends Shell {
  * @return void
  */
 	function initialize() {
-		$this->path = APP . 'plugins' . DS;
+		$this->path = App::path('plugins');
 	}
 
 /**
