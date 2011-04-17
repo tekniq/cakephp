@@ -928,7 +928,10 @@ class HtmlHelper extends AppHelper {
  * @param string $path Path with config file
  * @return mixed False to error or loaded configs
  */
-	public function loadConfig($configFile, $path = APP . 'config' . DS) {
+	public function loadConfig($configFile, $path = null) {
+		if (!$path) {
+			$path = APP . 'config' . DS;
+		}
 		$file = null;
 		$reader = 'php';
 
