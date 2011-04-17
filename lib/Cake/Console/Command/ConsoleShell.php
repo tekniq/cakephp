@@ -336,7 +336,7 @@ class ConsoleShell extends Shell {
 		Router::reload();
 		extract(Router::getNamedExpressions());
 
-		if (!@include(CONFIGS . 'routes.php')) {
+		if (!@include(APP . 'config' . DS . 'routes.php')) {
 			return false;
 		}
 		Router::parse('/');

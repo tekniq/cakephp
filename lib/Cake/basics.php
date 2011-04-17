@@ -43,10 +43,10 @@
 	function config() {
 		$args = func_get_args();
 		foreach ($args as $arg) {
-			if ($arg === 'database' && file_exists(CONFIGS . 'database.php')) {
-				include_once(CONFIGS . $arg . '.php');
-			} elseif (file_exists(CONFIGS . $arg . '.php')) {
-				include_once(CONFIGS . $arg . '.php');
+			if ($arg === 'database' && file_exists(APP . 'config' . DS . 'database.php')) {
+				include_once(APP . 'config' . DS . $arg . '.php');
+			} elseif (file_exists(APP . 'config' . DS . $arg . '.php')) {
+				include_once(APP . 'config' . DS . $arg . '.php');
 
 				if (count($args) == 1) {
 					return true;

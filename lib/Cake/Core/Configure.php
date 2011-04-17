@@ -69,14 +69,14 @@ class Configure {
 				'www_root' => WWW_ROOT
 			));
 
-			if (!include(CONFIGS . 'core.php')) {
-				trigger_error(__d('cake_dev', "Can't find application core file. Please create %score.php, and make sure it is readable by PHP.", CONFIGS), E_USER_ERROR);
+			if (!include(APP . 'config' . DS . 'core.php')) {
+				trigger_error(__d('cake_dev', "Can't find application core file. Please create %score.php, and make sure it is readable by PHP.", APP . 'config' . DS), E_USER_ERROR);
 			}
 
 			App::init();
 			App::build();
-			if (!include(CONFIGS . 'bootstrap.php')) {
-				trigger_error(__d('cake_dev', "Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP.", CONFIGS), E_USER_ERROR);
+			if (!include(APP . 'config' . DS . 'bootstrap.php')) {
+				trigger_error(__d('cake_dev', "Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP.", APP . 'config' . DS), E_USER_ERROR);
 			}
 			$level = -1;
 			if (isset(self::$_values['Error']['level'])) {

@@ -395,7 +395,7 @@ class SchemaShellTest extends CakeTestCase {
 		$this->Shell->params = array(
 			'connection' => 'test',
 			'name' => 'DbAcl',
-			'path' => CONFIGS . 'schema'
+			'path' => APP . 'config' . DS . 'schema'
 		);
 		$this->Shell->args = array('DbAcl', 'acos');
 		$this->Shell->startup();

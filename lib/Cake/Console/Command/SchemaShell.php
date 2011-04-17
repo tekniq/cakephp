@@ -150,7 +150,7 @@ class SchemaShell extends Shell {
 
 		$content = $this->Schema->read($options);
 		$content['file'] = $this->params['file'];
-		
+
 		Configure::write('Cache.disable', $cacheDisable);
 
 		if ($snapshot === true) {
@@ -271,7 +271,7 @@ class SchemaShell extends Shell {
 		if (!empty($this->params['plugin'])) {
 			$plugin = $this->params['plugin'];
 		}
-		
+
 		if (!empty($this->params['dry'])) {
 			$this->__dry = true;
 			$this->out(__d('cake_console', 'Performing a dry run.'));
@@ -438,7 +438,7 @@ class SchemaShell extends Shell {
 		);
 		$path = array(
 			'help' => __d('cake_console', 'Path to read and write schema.php'),
-			'default' => CONFIGS . 'schema'
+			'default' => APP . 'config' . DS . 'schema'
 		);
 		$file = array(
 			'help' => __d('cake_console', 'File name to read and write.'),
@@ -463,7 +463,7 @@ class SchemaShell extends Shell {
 		$write = array(
 			'help' => __d('cake_console', 'Write the dumped SQL to a file.')
 		);
-		
+
 		$parser = parent::getOptionParser();
 		$parser->description(
 			'The Schema Shell generates a schema object from' .
